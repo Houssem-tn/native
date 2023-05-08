@@ -10,6 +10,7 @@ export const Colors = {
     statusbar : "#ff8c52" ,
     headerText : "white",
     orange : "#ff8c52",
+    pagebackground:"white" ,
 }
 
 export const Parameters = {

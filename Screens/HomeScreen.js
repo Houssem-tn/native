@@ -1,14 +1,19 @@
 import { Colors,Parameters,title } from '../Styling/Style'
 import HomeHeader from "../components/HomeHeader";
-import { Image,Text,View,StyleSheet,ScrollView,FlatList,Pressable } from "react-native";
-import { dummy } from '../Styling/Dummy';
+import { Image,Text,View,StyleSheet,ScrollView,FlatList,Pressable,Dimensions, Button } from "react-native";
+import { dummy, restaurantData } from '../Styling/Dummy';
 import React ,{ useState } from 'react';
-export default function HomeScreen (){
+import RestaurantCard from '../components/RestaurantCard';
+
+const SCREEN_WIDTH=Dimensions.get("window").width
+export default function HomeScreen ({navigation}){
 
 const [indexCheck,setIndexCheck]= useState('0')
 return(
+    
 <View style = {styles.container}>
-<HomeHeader/>
+<HomeHeader navigation = {navigation}/>
+
 <ScrollView
 stickyHeaderIndices={[0]}
 showsVerticalScrollIndicator={true}
@@ -43,12 +48,34 @@ source={item.image}
 <View style={styles.headerTextView}>
     <Text style={styles.headerText}>Our restuarants</Text>
 </View>
+<View>
+    <FlatList
+    style={{marginTop:0,marginBottom:0}}
+    horizontal={false}
+    data={restaurantData}
+    keyExtractor={(item,index)=>index.toString()}
+    renderItem={({item})=>(
+        <View>
+            <RestaurantCard
+            screenWidth={SCREEN_WIDTH*0.9}
+            restaurentImage={item.restaurentImage}
+            restaurantName={item.restaurentName}
+            restaurentAddress={item.restaurentAddress}
+            restaurentSpecialite={item.restaurentSpecialite}
+            restaurentsNumberRates={item.restaurentsNumberRates}
+            restaurentRates={item.restaurentRates}
+            />
+        </View>
+    )}
+    />
+</View>
+
 </ScrollView>
 </View>
 )
 }
 const styles = StyleSheet.create ({
- container : {felx: 1}, 
+ container : {flex: 1}, 
  headerText :{color:Colors.grey1,
 fontSize:24,
 fontWeight:'bold',

@@ -95,7 +95,7 @@ const margin = width * (marginPercent / 100);
 <Button title="Sign in"
 buttonStyle = {Parameters.styledButton}
 titleStyle= {Parameters.buttonTitle}
-onPress={()=>{navigation.navigate('HomeScreen')}}
+onPress={()=>{navigation.navigate('DrawerNavigator')}}
 />
 </View>
 <View style={{alignItems:"center",marginTop:20}}>

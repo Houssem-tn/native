@@ -7,7 +7,7 @@ import {Icon}from 'react-native-elements'
 
 
 
-export default function HomeHeader() {
+export default function HomeHeader({navigation}) {
   
   const { width, height } = Dimensions.get('window');
   const marginLeftPercent = 5; // 5% of screen width
@@ -29,6 +29,7 @@ export default function HomeHeader() {
       name='menu'
       color={"white"}
       size={40}
+      onPress={()=>{navigation.toggleDrawer()}}
 
       />
      </View>

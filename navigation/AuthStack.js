@@ -4,6 +4,8 @@ import SignIn from "../Screens/SignIn";
 import WelcomeScreen from "../Screens/WelcomeScreen"
 import Splash from "../Screens/Splash";
 import HomeScreen from "../Screens/HomeScreen";
+import ClientTab from "./ClientTab";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Stack = createStackNavigator()
 
@@ -39,9 +41,18 @@ export default function AuthStack (){
         
         
         />
-         <Stack.Screen
+        {/* <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
+        options={{
+            headerShown:false,
+            ...TransitionPresets.RevealFromBottomAndroid
+        }}
+        
+        /> */}
+         <Stack.Screen
+        name="DrawerNavigator"
+        component={DrawerNavigator}
         options={{
             headerShown:false,
             ...TransitionPresets.RevealFromBottomAndroid
