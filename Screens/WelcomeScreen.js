@@ -49,6 +49,9 @@ export default function WelcomeScreen({ navigation }) {
             title="Create an account"
             buttonStyle={{ ...styles.createButton, height: height * 0.06 }}
             titleStyle={{ ...styles.createButtonTitle, fontSize: width * 0.05 }}
+            onPress={() => {
+              navigation.navigate('SignUpScreen')
+            }}
           />
         </View>
       </View>

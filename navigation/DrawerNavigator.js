@@ -6,11 +6,13 @@ import { Colors } from '../Styling/Style';
 import HelpScreen from '../Screens/HelpScreen';
 import DrawerContent from '../components/DrawerContent';
 const Drawer = createDrawerNavigator()
-export default function DrawerNavigator(){
-
+export default function DrawerNavigator({ route, ...props }) {
+    const { displayName, email } = route.params;
+    console.log("displayName DrawerNavigator", displayName);
+    console.log("email DrawerNavigator", email);
     return (
         <Drawer.Navigator
-        drawerContent={props=><DrawerContent {...props} />}
+        drawerContent={props=><DrawerContent {...props} displayName={displayName} email={email}/>}
         >
 
     <Drawer.Screen
@@ -38,7 +40,7 @@ export default function DrawerNavigator(){
         drawerIcon:({focused,size})=>(
             <Icon
             type='material-community'
-            name = 'help'
+            name = 'lifebuoy'
             color={focused ? "#7cc" : Colors.grey1}
             size={size}
             />

@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { View, TextInput,  Text, StyleSheet,Dimensions } from 'react-native';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+
 
 import Header from '../components/Header';
 
@@ -9,7 +12,7 @@ import { Colors,Parameters,title } from '../Styling/Style'
 import { Icon, colors,Input,Button, SocialIcon } from 'react-native-elements';
 
 const SignIn = ({navigation}) => {
-    
+  const [Assigned, setAssigned] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
  const [textInputFocused,setTextinputFocused]= useState(false)  
@@ -23,6 +26,34 @@ const paddingPercent = 2; // 2% of screen width
 const padding = width * (paddingPercent / 100);
 const marginPercent = 5; // 5% of screen width
 const margin = width * (marginPercent / 100);
+
+const handleEmail=(Newemail)=>{
+  setEmail(Newemail)
+
+}
+const handlePassword=(NewPassword)=>{
+  setPassword(NewPassword)
+
+}
+
+const handleSignIn = () => {
+  const auth = getAuth();
+  signInWithEmailAndPassword(auth, email, password)
+  .then(async (userCredential) => {
+    navigation.navigate('DrawerNavigator', {
+      displayName: userCredential._tokenResponse.displayName,
+      email:userCredential._tokenResponse.email
+    })
+    console.log(userCredential);
+    console.log(userCredential._tokenResponse.displayName);
+    console.log(userCredential._tokenResponse.email);
+  })
+  .catch((error) => {
+    console.log("Error signing in:", error);
+  });
+};
+
+
   return (
     
     <View >
@@ -52,7 +83,7 @@ const margin = width * (marginPercent / 100);
   <TextInput 
   style={{width:'85%'}}
     placeholder='Email'
-    onChangeText={setEmail}
+    onChangeText={handleEmail}
     value={email}
    
 
@@ -78,7 +109,7 @@ const margin = width * (marginPercent / 100);
   style={{width:'80%'}}
     placeholder='Password'
     secureTextEntry={true}
-    onChangeText={setPassword}
+    onChangeText={handlePassword}
     value={password}
     
     />
@@ -95,7 +126,8 @@ const margin = width * (marginPercent / 100);
 <Button title="Sign in"
 buttonStyle = {Parameters.styledButton}
 titleStyle= {Parameters.buttonTitle}
-onPress={()=>{navigation.navigate('DrawerNavigator')}}
+// onPress={()=>{navigation.navigate('DrawerNavigator')}}
+onPress={() => handleSignIn()}
 />
 </View>
 <View style={{alignItems:"center",marginTop:20}}>
@@ -130,6 +162,7 @@ onPress={()=>{navigation.navigate('DrawerNavigator')}}
   title="Create an account"
   buttonStyle={styles.createButton}
   titleStyle={styles.createButtonTitle}
+  onPress={() => navigation.navigate('SignUpScreen')}
   />
 </View>
     </View>

@@ -19,7 +19,7 @@ stickyHeaderIndices={[0]}
 showsVerticalScrollIndicator={true}
 >
 <View style={styles.headerTextView}>
-    <Text style={styles.headerText}>Categories</Text>
+    <Text style={styles.headerText}>What we are offering</Text>
 </View>
 <View>
    <FlatList
